@@ -1,1 +1,6 @@
-1
+2018/8/15
+1、工程导入、熟悉IDEA、Navicat工具常用操作；
+2、熟悉upm模块/org/user/role/permission/的业务；
+3、熟悉zhike项目rest接口返回、durcframework查询、分页查询等方面的机制和规范；
+
+2018/8/16

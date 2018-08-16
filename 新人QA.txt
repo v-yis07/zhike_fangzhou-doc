@@ -1,0 +1,31 @@
+问题：IDEA的project和module都默认使用java 5编译？
+方案：在pom.xml中指定compiler的版本(maven-compiler-plugin 1.8)
+
+问题：idea maven pom不自动更新？
+方案：1、maven project视窗——》reimport。2、关注下settings》Maven》Ignored Files。3、各个项目Import顺序
+
+问题：iml是什么文件？
+回答：iml是intellij idea的工程配置文件，里面是当前project的一些配置信息。
+
+问题：IDEA必备快捷键使用？
+回答：1、ctrl+q，获取api-doc；、idea快捷键设置成eclipse；
+
+问题：PermissionVO的menuType业务含义？
+回答：菜单类型(1：目录；2：菜单  3：按钮)
+
+问题：menu、menuId、menuType、menuUrl等业务含义和关系？
+Permission和menu关系？
+
+问题：mvn打包部署？common公共服务，provider配置没有？
+回答：1、公共工具包上传mvn库，通过mvn库来被依赖；2、业务服务为jar包，是最终部署的包；
+
+
+问题：db.username数据库全局配置文件位置？
+回答：main/env/
+
+问题：dubbo微服务应用本地启动？
+回答：1、启动zkServer；2、启动application；（zkServer连接测试：进入cmd下进bin目录，输入：zkCli.cmd 127.0.0.1:2181）
+
+问题：如何调试rest接口？
+回答：通过postman或者在本地搭建swagger（swagger环境的搭建（swagger-editor|swagger-ui））。
+
