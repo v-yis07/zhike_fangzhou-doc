@@ -29,3 +29,40 @@ Permission和menu关系？
 问题：如何调试rest接口？
 回答：通过postman或者在本地搭建swagger（swagger环境的搭建（swagger-editor|swagger-ui））。
 
+问题：如何监控dubbo服务的提供和消费情况？
+回答：安装appach tomcat，将dubbo-admin-2.6.0.war拷贝到webapp目录，启动tomcat就可以了。
+
+问题：crudframework跟表映射的实体怎么识别？
+回答：	1、Manager extends CrudService<Dao extends CrudDao<Entity>, Entity>;
+		2、所有crudao操作封装在Dao；
+		3、有注解@Table(name = "")
+		
+问题：Easymybatis的Entity和表字段名称怎么映射？
+回答：	1、通过@Column;
+		2、通过EasymybatisConfig插件，开启驼峰转下划线形式；如：userAge -> user_age
+		
+
+问题：本地调试rest接口，需要启动哪些服务？
+回答：rest消费者服务需要启动，提供RPC服务的生产者也需要启动。
+
+问题：实体使用处get/set报错,实体代码里没看到有set/get方法?
+回答：给IDEA添加lombok插件；
+
+问题：在settings.xml中使用activeProfiles指定多个处于激活状态的profile，后面的会覆盖前面的吗？
+回答：不是。根据定义顺序来，后定义的覆盖先定义的。
+
+
+
+——————用户、组织、角色、权限
+问题：角色层级、权限层级、用户和组织（是否有层级）怎么理解？
+回答：1、最终问题都是用户权限问题。2、
+
+问题：组织（机构）和团队的关系？
+回答：一个机构下面会有许多团队。
+
+问题：upm_permission的delete_flag是用来做伪删除的吗？
+回答：是的，基本表都会预留这个字段，即使实际业务用的是物理删除。
+
+问题：表结构设计原则
+回答：解除了用户和权限的直接耦合
+(任何权限的需求，都是为广义的用户分配角色，角色拥有广义的权限。角色是最重要的中枢，隐藏做幕后黑手，从不出现在业务代码里，用行话说就是解除了用户和权限的直接耦合。)
