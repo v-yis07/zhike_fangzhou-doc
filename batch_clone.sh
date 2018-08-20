@@ -1,0 +1,21 @@
+
+git clone http://v-yis07@git.vanke.com/zhike-dev/frontEnd/zhike-admin-site.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-crm.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-sso.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-upm.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-common.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-admin-gateway.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-product.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-sys.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-processor.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-scheduling.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-open-gateway.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-union.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-parent.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-customer.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-framework.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-plugin.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/zhike-frontEnd/zhike-admin-node.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/tool/zhike-apidoc.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/frontEnd/zhike-admin-node.git
+git clone http://v-yis07@git.vanke.com/zhike-dev/tool/easymybatis-generator.git
