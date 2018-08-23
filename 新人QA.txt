@@ -51,6 +51,27 @@ Permission和menu关系？
 问题：在settings.xml中使用activeProfiles指定多个处于激活状态的profile，后面的会覆盖前面的吗？
 回答：不是。根据定义顺序来，后定义的覆盖先定义的。
 
+问题：启动本地mysql服务器？
+回答：mysql --user root
+
+问题：session httpsession的使用场景、使用方法？
+回答：	1、所谓Session，指的是客户端和服务端之间的一段交互过程的状态信息（数据）；
+		2、当需要为用户端建立一个session时，servlet容器就创建了一个HttpSession对象。
+		3、
+		
+问题：session.login.checked 这个属性（配置）是干啥用的？
+回答：session启用开关，如果为false，则不走session权限校验逻辑。
+
+问题（框架）：shiro （java安全框架）
+1、三个核心组件：Subject（用户）, SecurityManager（核心，Facade模式） 和 Realms.
+2、
+
+问题：提示用户无权限？
+回答：可能1、HttpSession失效；2、静态资源没访问权限。
+
+问题：Spring validation不能获取到正确的错误校验信息？
+回答：""不校验，null会校验；
+
 
 
 ——————用户、组织、角色、权限
@@ -67,7 +88,11 @@ Permission和menu关系？
 回答：解除了用户和权限的直接耦合
 (任何权限的需求，都是为广义的用户分配角色，角色拥有广义的权限。角色是最重要的中枢，隐藏做幕后黑手，从不出现在业务代码里，用行话说就是解除了用户和权限的直接耦合。)
 
-问题：启动本地mysql服务器？
-回答：mysql --user root
+问题：角色权限菜单是只有admin能配置吗？还是根据当前角色权限来做限制？
+回答：统一由admin来配置。
 
-问题：Session的使用场景、使用方法？
+问题：超级管理员是什么？
+回答: roleId为1的角色。
+
+
+
