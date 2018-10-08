@@ -25,3 +25,222 @@
 新增用户后用户查询界面查询不到的问题？
 1、用户管理菜单--》新增用户操作，组织、权限是可填信息；
 2、用户查询接口，联表查询upm_user、upm_user_org_role、upm_role；
+
+2018/8/24
+问题：用户无法查询自己创建的角色？
+回答：1、在界面新增角色后，没有create_user_id，导致非超级管理员无法查询用户自己创建的角色。
+		2、API调用，menuUrl权限拦截。
+		
+2018/8/25
+需要写测试用例的接口列表：
+1、roles/add
+2、/page/list
+3、permissions/role/1
+
+2018/8/27
+3、提供接口物理删除用户关联表：upm_permission、upm_user_data_permission。
+1、角色选择列表（非superAdmin），本地OK，DEV查询为NULL？重新部署后OK
+TODO:
+2、权限管理模块目前都是单表操作，后续考虑性能优化？
+3、角色编辑接口报异常
+4、添加有父子的角色后，childRoleMap信息返回不正确
+
+
+2018/8/28
+DONE:
+2、角色新增有重名校验，但是角色编辑没做重名校验？
+TODO:
+1、用户管理——编辑，非管理员的时候角色可能不显示；
+2、数据权限校验，user_data_permission数据来源？
+3、product模块代码有两个方面比较乱：一、service层不要处理事务业务逻辑，具体业务应该迁移到manager；二、manager层混乱，跟业务映射不够准确；
+
+
+2018/8/30
+TODO:
+1、新增自定义产品后，show_city没入表product_main_product，show_city_code有;
+
+2、新增泊寓产品
+api/product/productMaintenance/addOrUpdateProductAll ——添加主产品
+api/product/updateProductInfo	——修改产品信息(优惠活动、地图)
+api/product/typeIntro/addorUpdate 	——户型介绍（修改和新增）
+
+3、新增新房产品
+api/product/productMaintenance/addOrUpdateProductAll ——添加主产品
+api/product/productMaintenance/addOrUpdateProduct	--product_main_product.city,product_city_stage_resource.city_sap_id什么关系？
+api/product/updateProductInfo
+api/product/typeIntro/addorUpdate
+
+
+
+2018/8/31
+1、产品中心：
+			产品管理TAB：（#）重置、新增、表单设置、新房、泊寓、自定义、推广项目、虚拟项目
+			产品排序TAB：
+3、（需产品确认）权限管理：菜单管理：add1、add2、add3、add0
+4、从permissions/defaultorg中过滤出一二级权限菜单
+5、同类型+同城+产品名称 、唯一；
+
+2018/9/1
+2、组织管理：组织架构管理:TAB：
+							
+TODO:
+权限管理
+3、Session过期，抛403
+
+
+
+2018/9/3
+1、菜单清单整体确认？
+TODO:
+2、产品信息编辑保存存放相关表有哪些？
+3、了解其他模块功能？了解二期需求？
+
+组织架构管理
+产品管理TAB
+结束项目： /api/product/finishProject
+发起审核： /api/product/initiateReview
+展示设置： /api/product/setShowApp
+上架： /api/product/order/onLine
+下架： /api/product/order/offLine
+同步项目： /api/product/syncProduct/
+销售家分期： /api/product/addStageXsj/
+神器分期： /api/product/addStageEstate/
+删除项目： /api/product/deleteProductByProcode
+编辑： 这个按钮只是跳转，没有借接口
+
+
+	"message":"无权限访问资源",
+	"path":"/api/dict/parent/list"
+	"path":"/api/roles/optionalList"
+	"path":"/api/productTypeCtl/queryAllProductType"
+	"path":"/api/dict/parent/list"
+	"path":"/api/roles/list"
+	
+2018/9/4
+	orgProd/deleteMarketingOrg/91
+	http://zhikedev.vanke.com:8080/api/product/order/selectProForAddAcross 403
+	/api/productTypeCtl/queryOtherProductType/other 
+	/api/product/productMaintenance/checkProject/copy&1535620737092A 
+	/api/product/boyuProject/getAllBoyuProduct 
+	GET /api/roles/get/11
+	/api/product/findProductByProType
+
+	api/product/wordSearch/detailOne
+	/api/product/productMaintenance/queryAllArea
+	/api/product/boyuProject/getCityProjects
+	/api/product/productMaintenance/queryAllCity/02 
+	/api/pkeywordslist/add 
+	/api/product/handleStandard/queryHouseType/1536044845569A 
+	/api/upload/getImageOssPolicy/item
+	api/product/saveOrUpdateDefineProduct
+	/api/product/updateProductInfo
+	/api/product/order/deleteAllAcrossCitysByProCode
+
+
+
+
+
+
+
+二期需求：
+1、提供城市名称查询接口：根据用户，查询当前组织，过滤出所有城市名称；
+	com.vanke.zhike.admin.gateway.controller.sys.branch.BranchManagementController#findUserCity
+2、dataPermissionServiceImpl，city_id、product_id。
+
+2018/9/5
+代码规范培训：
+	分类:业务日志、异常日志
+	日志目标：监控、性能
+	
+	日志框架：log4j、log4j2、LogBack、slf4j
+	日志使用方式:定义final变量；类名处注入@Slf4j
+	日志监控数据：方法名称、用户ID、IP、第三方接口、入参、返回
+	异常小技巧：异常有外抛的话就不需要再重复Log了；保留异常栈；
+	http请求打印：
+
+
+2018/9/6
+大家记得做查询的时候，记得调用下StringUtil.filterXss；
+接口返回了对应最新的权限，但是角色权限规则这里都没有默认选中，此时如果点保存的话，原有权限会被清掉；
+
+2018/9/7
+1、产品线数据权限怎么管理？（data_permission新增product_line字段）
+2、prod_type` varchar(64) NOT NULL COMMENT '产品类型表(新房、租房、多业态)',和org_info.id有关系么？
+3、组织下拉接口返回值，需要拼接到产品线的上级组织。
+4、定位测试环境重新部署后，upm_permission表里数据会被刷新，导致超级管理员角色权限丢失问题
+
+2018/9/11
+1、根据组织查找城市接口： OrgProductService.getBranchCityList
+2、获取有层级的组织名称：OrgProductService.getOrgLevelName
+3、组织名称实现分层展示；
+4、角色非1的，返回的权限清单里过滤调角色管理相关；（已验证）
+5、用户数据权限保存接口有问题:（异步调用.TODO:可能需要去除产品线的权限层级）
+	集团、区域、公司入表报异常；
+	识别城市和营销组织中间层;
+	
+2018/9/14
+	编辑用户：api/user/detail?id=111，返回信息里加加上角色名称、和roleId对应；
+	用户数据权限返回值中cityIds改为cityCodes；
+	数据权限城市级别，需要存储产品线信息；
+
+2018/9/18
+数据权限只保留产品级别；
+删除菜单的时候，也需要删除upm_permission表，并调用公共方法刷新redis所有角色权限；
+菜单管理排序（redis）；
+数据权限入表数据有重复，入表前根据org_id prod_code city_code prod_type_code 做去重处理；
+
+2018/9/20
+	结佣需求开发cancel
+		file:///D:/LocalGitHub/doc/zhike/产品需求/产品原型/统一后台三期-判客规则、线索列表、佣金-王蒙蒙/在线结佣-佣金确认.html
+
+		user/detail 用户信息查询返回是空值
+		4. 佣金单生成节点：
+
+			可按城市设置佣金单的生成节点：
+
+			1）认购形成佣金单：在销售系统录认购时生成佣金单
+
+			2）签约形成佣金单：在销售系统签约时形成佣金单
+
+			设置佣金单生成节点后，可限定只有在启用在线结佣期间推荐的线索达到生成节点时才形成在线结佣佣金单（佣金单进入在线结佣的待确认列表）。
+			若不限定，则只要在在线结佣开启期间达到生成节点的线索都会形成在线结佣佣金单。
+			
+		prd_online_maid_rule:product_code,agent_type,org_list,是否在线结佣(在线结佣)
+		prd_city_args_rule:city_code,启用在线结佣,（城市参数）
+		product_main_product:id,prd_code,area,price(规则列表)
+		prd_commission_rule:佣金规则ID,prd_code,rule_status,agent_type,(佣金规则列表)
+		cus_clues: cus_name,referer_name,pro_code,appoint_cst_name,serve_cst_name,state,hide_report_id(线索列表)
+		cus_recommend_relation:
+		sys_pathway:id,parent_id,city_code,prod_code,
+
+2018/9/25
+	数据权限需求
+		方案一，数据权限写中间表：
+			啥时候写表：1、用户对应组织角色信息修改；2、营销组织销售团队添加关联产品；
+		方案二，
+			1、数据权限不写表：直接从org_product查出来；
+		
+		
+2018/9/26
+		添加产品界面有权限的营销组织选择列表：    http://localhost:8888/api/org/permissions/marketOrgs
+		添加产品保存后调用保存营销组织接口:	com.vanke.zhike.sys.org.service.OrgProductServiceImpl#saveProductOrgs
+		营销组织编辑查询接口微调： /api/orgProd/detail/{orgId}
+		营销组织编辑保存接口valid微调，提示用户:请添加产品{"+marketProductCodes.toString()+"}至营销团队！；
+		
+	
+
+	TODO:消息管理
+		1、站内消息可根据城市和经纪人类型指定发布对象；
+		2、短信提醒设置，可设置区域、城市、提醒状态；（recipientIds: 487583）
+		3、邮件设置，需要维护消息模板；
+		4、缺字段：
+			`SEND_BATCH` bigint(32) NOT NULL COMMENT '发送批次号（发送多人时，批次号一致）',
+		
+	TODO:数据字典切换
+		系统管理目前识别出可以切换数据字典的地方有：产品线、菜单所属应用(目前先写死，后续切换完后再知会测试)；
+		
+	深圳市的销售团队可以卖东莞市的楼盘么？可以
+			
+			
+	wechat登录app、小程序
+	

@@ -1,7 +1,7 @@
 问题：IDEA的project和module都默认使用java 5编译？
 方案：在pom.xml中指定compiler的版本(maven-compiler-plugin 1.8)
 
-问题：idea maven pom不自动更新？
+问题： idea maven pom不自动更新？
 方案：1、maven project视窗——》reimport。2、关注下settings》Maven》Ignored Files。3、各个项目Import顺序
 
 问题：iml是什么文件？
@@ -9,6 +9,7 @@
 
 问题：IDEA必备快捷键使用？
 回答：1、ctrl+q，获取api-doc；、idea快捷键设置成eclipse；
+		2、修改后重编译 ctrl+F9;
 
 问题：PermissionVO的menuType业务含义？
 回答：菜单类型(1：目录；2：菜单  3：按钮)
@@ -72,7 +73,19 @@ Permission和menu关系？
 问题：Spring validation不能获取到正确的错误校验信息？
 回答：""不校验，null会校验；
 
+问题：@Controller和@RestController的区别？
+回答：@RestController注解相当于@ResponseBody ＋ @Controller合在一起的作用。
+	1) 如果只是使用@RestController注解Controller，则Controller中的方法无法返回jsp页面，或者html，配置的视图解析器 InternalResourceViewResolver不起作用，返回的内容就是Return 里的内容。
+	2) 如果需要返回到指定页面，则需要用 @Controller配合视图解析器InternalResourceViewResolver才行。
 
+问题：有修改数据库数据的接口（含redis），需要打印日志？
+回答：是，通过加注解实现，@SystemLogAnnotation(operMenu = "用户模块", operButton = "新增", operContent = "新增用户")
+
+问题：dubbo之RpcContext？zhike系统的用户信息是如何存入RpcContext来实现服务提供方和消费方直接传递的？
+回答：
+
+问题：BeanUtil.copyNotNull,可以实现深度递归对象拷贝？
+回答：
 
 ——————用户、组织、角色、权限
 问题：角色层级、权限层级、用户和组织（是否有层级）怎么理解？
@@ -93,6 +106,95 @@ Permission和menu关系？
 
 问题：超级管理员是什么？
 回答: roleId为1的角色。
+
+—————— product业务
+	1、新增自定义产品后，show_city没入表product_main_product，show_city_code有;
+
+	2、新增泊寓产品
+	api/product/productMaintenance/addOrUpdateProductAll ——添加主产品
+	api/product/updateProductInfo	——修改产品信息(优惠活动、地图)
+	api/product/typeIntro/addorUpdate 	——户型介绍（修改和新增）
+
+	3、新增新房产品
+	api/product/productMaintenance/addOrUpdateProduct	--product_main_product.city,product_city_stage_resource.city_sap_id什么关系？
+	api/product/updateProductInfo
+	api/product/typeIntro/addorUpdate
+
+——————redis 常用操作命令
+	KEYS pattern --KEYS命令一次性返回所有匹配的key
+	GET --取
+	SET --设值
+	L/RPUSH --插入值到集合
+
+
+——————mySQL 常用操作
+	1、如果要清空表中的所有记录，可以使用下面的两种方法：
+	　      DELETE FROM table1
+	　      TRUNCATE TABLE table1
+	其中第二条记录中的TABLE是可选的。
+	2、UPDATE 
+		UPDATE A a,B b SET a.name=b.name WHERE a.id=b.id;
+	3、 INSERT INTO + SELECT
+		1>、SELECT INTO FROM语句
+
+			语句形式为：SELECT vale1, value2 into Table2 from Table1
+
+			要求目标表Table2不存在，因为在插入时会自动创建表Table2，并将Table1中指定字段数据复制到Table2中
+
+		2>、INSERT INTO SELECT语句
+
+			语句形式为：Insert into Table2(field1,field2,...) select value1,value2,... from Table1
+
+			要求目标表Table2必须存在，由于目标表Table2已经存在，所以我们除了插入源表Table1的字段外，还可以插入常量
+	4、DELETE
+		. delete from table... 这其中table不能使用别名
+		. 综合起来就是mysql delete from where in 时后面 的查询语句里不能加where条件
+
+——————极光 消息推送
+	
+———————敏捷培训
+	定义：快速交付、团队协作、响应客户要求、拥抱变化
+	核心问题：有价值的需求、理想的交付、买单的客户
+	不确定性：快速低成本的
+	交付价值、验证假设、响应变化；
+	价值区分、实现方式、内部控制风险管理（沟通信任，防止和发现舞弊与错误）、任务拆分、
+	计划：
+	知识累积和决策时间点悖论：通过健康迭代等方式来避免；
+	传统行业 永续
+	资源效率：流动效率、质量效率、（让医院的资源流动起来，而不是用户）；
+	束水冲沙法，就是收紧河道，利用水的冲力，冲击河床底部泥沙，从而达到清淤防洪的目的。一般适用于流量较大的河流；
+	客户响应周期>需求交付周期>开发周期；
+	
+初始化数组List：new ArrayList<Byte>(){{add(OrgTypeEnum.MARKETING_TEAM.getType());}}
+	
+外观设计模式：Client-->Facade-->SubSystem123;
+——————微信开发者平台、微信小程序、app
+1、微信openid会变吗？
+不会的，是唯一的。
+在关注者与公众号产生消息交互后，公众号可获得关注者的OpenID（加密后的微信号，每个用户对每个公众号的OpenID是唯一的。对于不同公众号，同一用户的openid不同）。
+2、token的作用是什么？
+回答：这个accessToken的作用是获取用户信息，因此如果你只是拿一次用户信息的话就没必要缓存它，如果你想后台自动更新用户信息，就需要缓存，取决于你的业务场景。
+3、网页授权的access_token和普通（公众号）access_token的异同？
+回答：  1>使用范围：通过网页授权获得的access_token，只能获取到对应的微信用户信息，与微信用户是一对一关系；而普通的access_token在有效期内可以使用，可以获取所有用户信息。
+		2>次数限制：普通access_token每天获取最多次数为2000次，而网页授权的access_token获取次数没有限制。
+
+
+3、app、applet、h5 有哪些公共功能？
+	auth、userInfo（WeChatUserInfo.class）、AppletFans(appletFansService.saveAppletFans)、小程序分享转发功能、
+4、哪些业务类、非公共功能？
+	经纪人fans、客户社交关系、签到管理、线索动态、置业顾问发展经纪人、经纪人发展客户、各城市推广活动(抽奖)查询和管理、小程序端banner图相关服务实现
+	小程序 我的、小程序访问积分商城api、优惠券相关api、小程序渠道管理、
+
+
+
+
+
+
+
+
+
+
+
 
 
 
