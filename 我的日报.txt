@@ -244,3 +244,67 @@ TODO:
 			
 	wechat登录app、小程序
 	
+	
+	
+2018/10/9 合作渠道
+根据prdCode获取途径列表：com.vanke.zhike.product.pathway.inf.PathwayService#getPathwaysByProdCode
+
+sys_pathway：
+1、一个认知途径会对应多个产品么？
+答：产品层级的认知途径不会。城市层级的可能会。
+2、产品和认知途径的关系是一对多？
+答：产品层级是的。
+
+prd_cooperation_channel：
+1、团队比例只跟产品+认知途径直接关联？
+答：是的。
+2、认知途径关联团队数据来源？
+答：org_info，销售团队。
+
+需要提供给前台的接口：
+1、表格操作相关：
+	query,-- -- api/product/cooperationChannel/list
+	disable,-- api/product/cooperationChannel/disable
+	enable, -- api/product/cooperationChannel/enable
+	delete; -- api/product/cooperationChannel/delete
+2、新增编辑：
+	add, -- api/product/cooperationChannel/save
+	edit, -- api/product/cooperationChannel/save
+	合作机构列表查询/{city_code},-- api/branch/QueryOrgInfo
+	api/pathway/teamRatio/list/{city_code}/{prod_code}（含团队分配比例信息）;-- api/pathway/teamRatio/list
+TODO:
+1、分页？
+2、编辑后，合作渠道数据重复生成？
+3、认知途径name为空？
+如果认知途径没有配置团队分配比例，怎么获取需要显示的团队？
+
+
+2018/10/9 #经理管理：
+支持创建用户，关联销售家3个经理角色中某一个，支持关联一个组织。
+关联组织是否有要求？
+
+需要提供给前台的接口：
+增、
+删
+改
+查
+重置密码：内部和外部密码同步设置(3)、个人中心修改密码、
+
+获取证件类型列表：api/dict/chird/list/{certificateType}
+证件类型：
+(SD1010001:身份证,SD1010002:军官证,SD1010003:护照,SD1010004:户口簿,SD1010005:台湾通行证,SD1010006:台湾身份证,SD1010007:港澳身份证,SD1010008:营业执照,SD1010009:组织机构代码,
+SD1010010:税务登记证号,SD1010011:其他)
+
+最大经理角色-》有分期产品-》sapId
+UserRegVO.java
+
+com.vanke.zhike.sys.sales.inf.SyncNssSalesTeamService#regUser
+
+入参：prodCode,roleTypeList
+返回：mobiles.
+prodCode->org_id->role_id
+
+
+2018/11/1 # ：
+
+

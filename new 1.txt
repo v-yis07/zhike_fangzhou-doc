@@ -1,0 +1,28 @@
+13761628230        a1111111 
+超级管理员：
+13202265255        vk123456
+
+修改角色2
+	eason7 21
+	
+=IF(A2<>"",CONCATENATE("insert into upm_menu_eason(","menu_name,","permission_code,","menu_url,","menu_type,","menu_level",") values ('",A2,"','",D1,"','",E1,"',",1,");"),
+IF(B2<>"",CONCATENATE("insert into upm_menu_eason(","menu_name,","permission_code,","menu_url,","menu_type,","menu_level",") values ('",B2,"','",D1,"','",E1,"',",2,");"),
+IF(C2<>"",CONCATENATE("insert into upm_menu_eason(","menu_name,","permission_code,","menu_url,","menu_type,","menu_level",") values ('",C2,"','",D1,"','",E1,"',",0,");"),
+"error!ABC ALL NULL!")
+)
+)
+
+=IF(A2<>"",CONCATENATE("insert into upm_menu_eason(","menu_name,","permission_code,","menu_url,","menu_type,","menu_level",") values ('",A2,"','",D1,"','",E1,"',",1,",",1,");"),
+IF(B2<>"",CONCATENATE("insert into upm_menu_eason(","menu_name,","permission_code,","menu_url,","menu_type,","menu_level",") values ('",B2,"','",D1,"','",E1,"',",2,",",2,");"),
+IF(C2<>"",CONCATENATE("insert into upm_menu_eason(","menu_name,","permission_code,","menu_url,","menu_type,","menu_level",") values ('",C2,"','",D1,"','",E1,"',",0,",",3,");"),
+"error!ABC ALL NULL!")
+)
+)
+
+
+insert into upm_menu_eason(menu_name,permission_code,menu_url,menu_type,) values('权限管理','code','菜单url','1');
+insert into upm_menu_eason(menu_name,permission_code,menu_url,menu_type,) values('用户管理','upm','#','2');
+insert into upm_menu_eason(menu_name,permission_code,menu_url,menu_type,) values('查询','upm:user','#','0');
+
+
+
